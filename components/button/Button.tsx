@@ -13,7 +13,7 @@ const BtnDot = styled.div({
   height: '30px',
 })
 
-const Btn = styled.button({
+const Btn = styled.button(({ theme }) => ({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
@@ -22,17 +22,30 @@ const Btn = styled.button({
   color: 'green',
   padding: '1rem',
   height: '50px',
-  width: '120px',
-  [`&:hover ${BtnDot}`]: {
-    position: 'absolute',
-    height: '100%',
-    width: '100%',
-    transition: '1s ease-in-out',
+  width: theme.size[11],
+
+  // '&:hover': {
+  //   '&:after': {
+  //     content: '""',
+  //     backgroundColor: 'red',
+  //     height: '100%',
+  //     width: '100%',
+  //     transition: '1s ease-in-out',
+  //   },
+  // },
+
+  // [`&:hover ${BtnDot}`]: {
+  '&:hover': {
+    [BtnDot.toString()]: {
+      position: 'absolute',
+      height: '100%',
+      width: '100%',
+      transition: '1s ease-in-out',
+    },
   },
-})
+}))
 
 export const Button = ({ children, ...props }: ButtonProps) => {
-
   return (
     <Btn {...props}>
       <BtnDot></BtnDot>
