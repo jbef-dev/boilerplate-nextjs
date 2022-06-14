@@ -4,7 +4,7 @@ const nextConfig = {
   i18n: {
     // Locales provided in config as per docs:
     // https://nextjs.org/docs/advanced-features/i18n-routing
-    locales: ['en', 'es'],
+    locales: ['es', 'en', 'fr'],
     defaultLocale: 'es',
   },
   // As per official template
