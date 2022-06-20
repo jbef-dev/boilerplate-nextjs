@@ -1,60 +1,129 @@
+import logo from '@/public/jbef_logo.png'
 import { useTheme } from '@emotion/react'
+import styled from '@emotion/styled'
+import { AnimatePresence, motion } from 'framer-motion'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import {
-  HamburguerContainer,
-  LogoContainer,
-  MobileMenu,
-  NavContainer,
-  NavLinkContainer,
-  NavWrapper,
-} from './Navbar.styled'
-import { NavItem } from './NavMenuLarge'
+import { MouseEvent, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
+import { HamburgerIcon } from './HamburgerIcon'
+import { NavItem } from './NavItem'
+import { MobileMenu } from './MobileMenu'
+import { DesktopMenu } from './DesktopMenu'
+import { LanguageSelector } from './LanguageSelector'
+import { NAVBAR_LINKS } from '@/utils/constants'
 
-interface Link {
-  link: string
-  label: string
-}
+const NavContainer = styled(motion.nav)(({ theme }) => ({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  display: 'flex',
+  width: '100%',
+  padding: `0 ${theme.size[4]}`,
+  height: theme.layout.header.height,
+  alignItems: 'center',
+  justifyContent: 'center',
+}))
 
-const links: Link[] = [
-  { link: '/', label: 'HOME' },
-  { link: '/services', label: 'SERVICES' },
-  { link: '/about-us', label: 'ABOUT US' },
-  { link: '/contact', label: 'CONTACT US' },
-]
+const NavWrapper = styled.div(({ theme }) => ({
+  display: 'flex',
+  position: 'relative',
+  height: theme.layout.header.height,
+  width: '100%',
+  maxWidth: theme.breakpoints.xl,
+  justifyContent: 'space-around',
+  alignItems: 'center',
+}))
+
+const HamburguerContainer = styled.div(({ theme }) => ({
+  display: 'none',
+  alignItems: 'center',
+  gap: theme.size[1],
+
+  [`@media (max-width: ${theme.breakpoints.md})`]: {
+    display: 'flex',
+  },
+}))
+
+const LogoContainer = styled.div(({ theme }) => ({
+  display: 'flex',
+  position: 'relative',
+  alignItems: 'center',
+  height: '100%',
+  width: theme.layout.header.height,
+  cursor: 'pointer',
+  zIndex: theme.layout.zIndex.high,
+}))
+
+// WORKING WITH DOT AND THEN UNDERLINE MOVE TO IT
+const UnderlineItem = styled(motion.svg)<{
+  selected: boolean
+}>(({ theme, ...props }) => ({
+  position: 'absolute',
+  width: props.selected ? '100%' : '0px',
+  left: props.selected ? 0 : 'calc(50% - 0px)',
+  top: '100%',
+  height: '3px',
+  borderRadius: theme.border.radius.xs,
+  right: 0,
+  background: theme.palette.accent.main,
+}))
 
 export const Navbar: React.FC = () => {
-  const theme = useTheme()
   const router = useRouter()
+  const intl = useIntl()
+  const theme = useTheme()
 
   const [open, setOpen] = useState<boolean>(false)
   const [active, setActive] = useState<string>(router.asPath)
+  const [hover, setHover] = useState<string>()
 
   useEffect(() => {
     setActive(router.asPath)
   }, [router.asPath])
 
+  useEffect(() => {
+    document.body.style.overflowY = open ? 'hidden' : 'scroll'
+  }, [open])
+
   const handleNavigate = (e: React.MouseEvent, link: string) => {
     e.preventDefault()
     setOpen(false)
+    setHover(undefined)
+    setActive(link)
     router.push(link)
   }
 
-  const items = links.map(link => (
+  // THIS HAS DOT APPEAR BELOW AND THEN UNDERLINE MOVES TO IT
+  const items = NAVBAR_LINKS.map(link => (
     <NavItem
       key={link.label}
       link={link}
       selected={active === link.link}
-      onClick={(e: React.MouseEvent) => handleNavigate(e, link.link)}
+      onClick={(e: MouseEvent) => handleNavigate(e, link.link)}
+      onHoverStart={() => {
+        active === '/' && setHover(link.link)
+      }}
+      variants={{
+        open: { opacity: 1, transition: { duration: 0.05 } },
+        closed: { opacity: 0, transition: { duration: 0.05 } },
+      }}
+      animate
     >
-      {link.label}
+      {intl.formatMessage({ id: link.label })}
+      <AnimatePresence exitBeforeEnter>
+        {(active === link.link || hover === link.link) && (
+          <UnderlineItem
+            key={link.link}
+            selected={active === link.link}
+            transition={theme.animation.framer.tween}
+            layoutId='underline'
+            exit={{ originX: '50%', scaleX: 0 }}
+          />
+        )}
+      </AnimatePresence>
     </NavItem>
   ))
-
-  const dropdownVariants = {
-    open: { x: 0 },
-    closed: { x: '-100%' },
-  }
 
   return (
     <NavContainer>
@@ -62,50 +131,30 @@ export const Navbar: React.FC = () => {
         <LogoContainer
           onClick={(e: React.MouseEvent) => handleNavigate(e, '/')}
         >
-          <img
-            alt='CNG Lawyers logo'
-            src='/logo.svg'
-            loading='lazy'
-            width='128px'
-            height='50px'
-          />
+          <Image alt='Logo' src={logo} layout='fill' objectFit='contain' />
         </LogoContainer>
 
         <HamburguerContainer>
-          {/* NOT IMPLEMENTED YET */}
-          {/* <ContactButton */}
-          {/*   size='small' */}
-          {/*   btnFontSize='sm' */}
-          {/*   onClick={(e: React.MouseEvent) => { */}
-          {/*     viewContact() */}
-          {/*     handleNavigate(e, '/contact') */}
-          {/*   }} */}
-          {/* > */}
-          {/*   Contact us */}
-          {/* </ContactButton> */}
           <button
             aria-label={`${open ? 'open' : 'close'} menu button`}
             onClick={() => setOpen(!open)}
+            style={{
+              zIndex: theme.layout.zIndex.high,
+            }}
           >
-            {/* {!open ? ( */}
-            {/*   <MenuRounded fontSize='large' /> */}
-            {/* ) : ( */}
-            {/*   <CloseRounded fontSize='large' /> */}
-            {/* )} */}
+            <HamburgerIcon open={open} />
           </button>
         </HamburguerContainer>
 
-        <NavLinkContainer>{items}</NavLinkContainer>
-
-        <MobileMenu
-          // component={motion.div}
-          initial={open ? 'open' : 'closed'}
-          animate={open ? 'open' : 'closed'}
-          variants={dropdownVariants}
-          transition={theme.framerAnimation.standard}
+        <MobileMenu open={open}>{items}</MobileMenu>
+        <DesktopMenu
+          onHoverEnd={() => {
+            active === '/' && setHover(router.asPath)
+          }}
         >
           {items}
-        </MobileMenu>
+        </DesktopMenu>
+        <LanguageSelector />
       </NavWrapper>
     </NavContainer>
   )

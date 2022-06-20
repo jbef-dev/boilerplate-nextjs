@@ -1,21 +1,21 @@
-import es from '@/lang/es.json'
-import en from '@/lang/en.json'
-import fr from '@/lang/fr.json'
+import esMessages from '@/lang/es'
+import enMessages from '@/lang/en'
+import frMessages from '@/lang/fr'
 
 // using as const makes it so that only the values provided are accepted
-export const locales = ['en', 'es', 'fr'] as const
-export type Locales = typeof locales[number]
+export const LOCALES = ['en', 'es', 'fr'] as const
+export type Locales = typeof LOCALES[number]
 
-type IntlMessages = typeof en
+export type IntlMessages = typeof enMessages
 
 type Messages = {
   [k in Locales]: IntlMessages
 }
 
 export const messages: Messages = {
-  en: en,
-  es: es,
-  fr: fr,
+  en: enMessages,
+  es: esMessages,
+  fr: frMessages,
 }
 
 // strongly gyped ids for function and component as per docs:

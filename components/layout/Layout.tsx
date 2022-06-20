@@ -1,18 +1,24 @@
-import { Button } from '@components/button/Button'
-import { Navbar } from '@components/navbar/Navbar'
+import { Navbar } from '@components/Navbar/Navbar'
+import styled from '@emotion/styled'
 
 type LayoutProps = {
   children: React.ReactNode
 }
 
+const MainContainer = styled.div(({ theme }) => ({
+  paddingTop: theme.layout.header.height,
+  display: 'flex',
+  flexDirection: 'column',
+  minHeight: `100vh-${theme.layout.footer.height}px`,
+  // minHeight: `100vh`,
+}))
+
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Navbar />
-      <div>
-        <Button>KEKWWW</Button>
-        {children}
-      </div>
+      <MainContainer>{children}</MainContainer>
+      {/* <div>{children}</div> */}
       {/* <Footer /> */}
     </>
   )

@@ -3,5 +3,5 @@ interface HamburgerIconProps {
 }
 
 export const HamburgerIcon = ({ open }: HamburgerIconProps) => {
-  return <></>
+  return open ? <div>C</div> : <div>O</div>
 }

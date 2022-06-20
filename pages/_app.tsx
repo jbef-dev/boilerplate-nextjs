@@ -1,9 +1,9 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { Layout } from '@components/layout/Layout'
+import { Layout } from '@components/Layout/Layout'
 import { IntlProvider } from 'react-intl'
 import { useRouter } from 'next/router'
-import { messages, Locales } from '@/utils/langConfig'
+import { messages, Locales } from '@/utils/localeConfig'
 import { ThemeProvider } from '@emotion/react'
 import { theme } from 'styles/theme'
 

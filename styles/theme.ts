@@ -1,9 +1,21 @@
+import customAnimations from './customAnimations'
+import palette from './palette'
+import font from './font'
+
 export const theme = {
   border: {
     radius: {
       xs: '2px',
       sm: '4px',
       md: '6px',
+      lg: '8px',
+      xl: '10px',
+    },
+
+    width: {
+      xs: '1px',
+      sm: '2px',
+      md: '4px',
       lg: '8px',
       xl: '10px',
     },
@@ -15,33 +27,8 @@ export const theme = {
     lg: '1200px',
     xl: '1536px',
   },
-  font: {
-    size: [
-      '0px',
-      '12px',
-      '14px',
-      '16px',
-      '18px',
-      '20px',
-      '24px',
-      '30px',
-      '36px',
-      '48px',
-      '60px',
-      '72px',
-    ],
-    weight: {
-      light: 200,
-      regular: 400,
-      medium: 500,
-      bold: 700,
-      black: 900,
-    },
-  },
-  framerAnimation: {
-    standard: { type: 'spring', damping: 24, stiffness: 280 },
-    infinite: { type: 'spring', damping: 24, stiffness: 280 },
-  },
+  font: font,
+  animation: customAnimations,
   layout: {
     body: {
       width: '100%',
@@ -52,51 +39,34 @@ export const theme = {
     header: {
       height: 65,
     },
-  },
-  palette: {
-    primary: {
-      main: '#226093',
-      light: '#7DA0C3',
-    },
-    accent: {
-      main: '#7DA0C3',
-      light: '#7DA0C3',
-    },
-    grey: {
-      darkest: 'hsl(209,15%,28%)',
-      dark: 'hsl(207,12%,43%)',
-      mid: 'hsl(208,12%,58%)',
-      light: 'hsl(210,16%,76%)',
-      lightest: 'hsl(208,21%,88%)',
-    },
-    error: {
-      main: '#FF4365',
-      light: '#7DA0C3',
-    },
-    extra: {
-      main: '#FFBC42',
-      light: '#FFCD70',
+    zIndex: {
+      lowest: 0,
+      low: 10,
+      mid: 50,
+      high: 70,
+      highest: 100,
     },
   },
-  size: [
-    '0px',
-    '4px',
-    '8px',
-    '12px',
-    '16px',
-    '24px',
-    '32px',
-    '48px',
-    '64px',
-    '96px',
-    '128px',
-    '192px',
-    '256px',
-    '384px',
-    '512px',
-    '640px',
-    '768px',
-  ],
+  palette: palette,
+  size: {
+    0: '0px',
+    1: '4px',
+    2: '8px',
+    3: '12px',
+    4: '16px',
+    5: '24px',
+    6: '32px',
+    7: '48px',
+    8: '64px',
+    9: '96px',
+    10: '128px',
+    11: '192px',
+    12: '256px',
+    13: '384px',
+    14: '512px',
+    15: '640px',
+    16: '768px',
+  },
 }
 
 export type CustomTheme = typeof theme
