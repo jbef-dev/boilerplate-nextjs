@@ -23,7 +23,7 @@ const LangMenuWrapper = styled(motion.div)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   border: theme.border.width.xs,
-  color: theme.palette.grey.lightest,
+  // color: theme.palette.text.light[0],
   zIndex: theme.layout.zIndex.highest,
   backgroundColor: theme.palette.primary.main,
 }))
@@ -34,7 +34,7 @@ const LangButton = styled(motion.button)(({ theme }) => ({
   alignItems: 'center',
   justifyContent: 'center',
   border: theme.border.width.xs,
-  color: theme.palette.grey.lightest,
+  color: theme.palette.text.light[0],
   padding: `${theme.size[2]} ${theme.size[3]}`,
   zIndex: theme.layout.zIndex.highest,
   backgroundColor: theme.palette.primary.main,
@@ -58,8 +58,12 @@ const LangItem = styled(motion.button)<{ open: boolean }>(
     opacity: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: theme.size[1],
+    paddingBottom: theme.size[2],
     color: theme.palette.text.light[0],
+    ['&:disabled']: {
+      position: 'absolute',
+      visibility: 'hidden',
+    },
   })
 )
 
@@ -116,9 +120,8 @@ export const LanguageSelector = () => {
       layout
       open={open}
       variants={langItemVariants}
-      // initial={open ? 'open' : 'closed'}
-      // animate={open ? 'open' : 'closed'}
       animate
+      disabled={locale === router.locale}
       exit={{
         y: '-100%',
         opacity: 0,

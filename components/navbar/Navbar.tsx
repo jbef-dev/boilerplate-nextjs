@@ -64,9 +64,9 @@ const UnderlineItem = styled(motion.svg)<{
   left: props.selected ? 0 : 'calc(50% - 0px)',
   top: '100%',
   height: '3px',
-  borderRadius: theme.border.radius.xs,
+  // borderRadius: theme.border.radius.xs,
   right: 0,
-  background: theme.palette.accent.main,
+  backgroundColor: theme.palette.accent.main,
 }))
 
 export const Navbar: React.FC = () => {

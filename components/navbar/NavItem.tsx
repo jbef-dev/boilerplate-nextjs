@@ -14,8 +14,7 @@ const NavLink = styled(motion.div)<{ selected: boolean }>(
     fontWeight: theme.font.weight.medium,
     color: props.selected
       ? theme.palette.text.dark[0]
-      : theme.palette.text.dark[2],
-    // color: theme.palette.primary.main,
+      : theme.palette.text.dark[1],
     transition: theme.animation.css.standard,
 
     '&:after': {

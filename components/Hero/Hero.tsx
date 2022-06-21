@@ -1,5 +1,8 @@
 import styled from '@emotion/styled'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { useIntl } from 'react-intl'
+import dr_abel from '@/public/dr_abel_martinez.png'
 
 const HeroContainer = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -8,7 +11,23 @@ const HeroContainer = styled('div')(({ theme }) => ({
   padding: theme.size[4],
   paddingTop: theme.layout.header.height,
   marginTop: -1 * theme.layout.header.height,
-  backgroundColor: theme.palette.accent.main,
+  backgroundColor: theme.palette.grey[7],
+}))
+
+const HeroWrapper = styled('div')(({ theme }) => ({
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}))
+
+const HeroImage = styled(motion.div)(({ theme }) => ({
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  // height: '40%',
+  // width: '100%',
 }))
 
 const HeroTitle = styled('h1')(({ theme }) => ({
@@ -20,7 +39,20 @@ export const Hero = () => {
 
   return (
     <HeroContainer>
-      <HeroTitle>{intl.formatMessage({ id: 'index.hero1' })}</HeroTitle>
+      <HeroWrapper>
+        <div>
+          <HeroTitle>{intl.formatMessage({ id: 'index.hero1' })}</HeroTitle>
+        </div>
+        <HeroImage>
+          <Image
+            src={dr_abel}
+            // height='200px'
+            // width='200px'
+            layout='fill'
+            objectFit='contain'
+          />
+        </HeroImage>
+      </HeroWrapper>
     </HeroContainer>
   )
 }

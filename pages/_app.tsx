@@ -1,6 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { Layout } from '@components/Layout/Layout'
+import { Layout } from '@ui/Layout/Layout'
 import { IntlProvider } from 'react-intl'
 import { useRouter } from 'next/router'
 import { messages, Locales } from '@/utils/localeConfig'

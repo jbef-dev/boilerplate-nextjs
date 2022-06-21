@@ -18,7 +18,6 @@ export const Layout = ({ children }: LayoutProps) => {
     <>
       <Navbar />
       <MainContainer>{children}</MainContainer>
-      {/* <div>{children}</div> */}
       {/* <Footer /> */}
     </>
   )

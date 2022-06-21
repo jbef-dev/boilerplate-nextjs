@@ -23,7 +23,7 @@ const MobileMenuContainer = styled(motion.div, {
   zIndex: theme.layout.zIndex.mid,
   border: 0,
   overflow: 'hidden',
-  backgroundColor: theme.palette.grey.lightest,
+  backgroundColor: theme.palette.grey[4],
 
   [`@media (max-width: ${theme.breakpoints.md})`]: {
     display: 'flex',
