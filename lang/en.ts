@@ -15,6 +15,12 @@ const enMessages = {
   'about.description': 'description English',
   'about.hero1': 'hero section text',
   'about.hero2': 'hero text name {kekw} 2',
+
+  // Contact Page
+  'contact.title': 'Title English',
+  'contact.description': 'description English',
+  'contact.hero1': 'hero section text',
+  'contact.hero2': 'hero text name {kekw} 2',
 }
 
 export default enMessages

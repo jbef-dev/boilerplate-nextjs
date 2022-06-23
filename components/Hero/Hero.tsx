@@ -10,7 +10,7 @@ const HeroContainer = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   padding: theme.size[4],
   paddingTop: theme.layout.header.height,
-  marginTop: -1 * theme.layout.header.height,
+  marginTop: `calc(-1 * ${theme.layout.header.height})`,
   backgroundColor: theme.palette.grey[7],
 }))
 

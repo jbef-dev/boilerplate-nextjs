@@ -1,71 +1,81 @@
+import { useTheme } from '@emotion/react'
 import Image from 'next/image'
-import { theme } from '../../styles/theme'
+import { FOOTER_GROUPS, CONTACT_INFO } from '@/utils/constants'
+import logo from '@/public/jbef_logo.png'
 
 export const Footer = () => {
+  const theme = useTheme()
+
   return (
     <footer
-      sx={{
-        height: theme.custom.footer.height,
-        py: theme.custom.spacing.sm,
-        backgroundColor: theme.palette.grey[100],
-        color: theme.palette.grey[500],
+      style={{
+        height: theme.layout.footer.height,
+        padding: `${theme.size[1]} 0`,
+        backgroundColor: theme.palette.grey[4],
+        color: theme.palette.text.dark[1],
       }}
     >
       <div
-        sx={{
+        style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'space-evenly',
-          maxWidth: theme.breakpoints.values.xl,
+          maxWidth: theme.breakpoints.xl,
           height: '100%',
         }}
       >
         <div
-          sx={{
+          style={{
             display: 'flex',
             width: '100%',
             alignItems: 'center',
-            justifyContent: { xs: 'center', md: 'space-around' },
+            justifyContent: 'space-around',
+            [`@media (maxWidth: ${theme.breakpoints.md})`]: {
+              justifyContent: 'center',
+            },
           }}
         >
           <div
-            sx={{
+            style={{
               display: 'flex',
               alignItems: 'center',
-              gap: theme.custom.spacing.md,
+              gap: theme.spacing[4],
             }}
           >
             <div
-              sx={{
+              style={{
                 width: '150px',
               }}
             >
               <Image
-                alt='CNG Lawyers logo'
-                src='/logo.svg'
+                alt='Logo'
+                src={logo}
                 loading='lazy'
-                width='128px'
-                height='50px'
+                // width='128px'
+                // height='50px'
               />
             </div>
             <div>
-              {Object.values(footerContact).map((val, i) => (
+              {Object.values(CONTACT_INFO).map((val, i) => (
                 <span key={i}>{val}</span>
               ))}
             </div>
           </div>
           <div
-            sx={{
-              display: { xs: 'none', md: 'flex' },
+            style={{
+              display: 'flex',
               flexWrap: 'wrap',
-              gap: theme.custom.spacing.lg,
+              gap: theme.spacing[8],
+              [`@media (maxWidth: ${theme.breakpoints.md})`]: {
+                display: 'none',
+              },
             }}
           >
-            {footerCols.map((col, i) => (
+            {FOOTER_GROUPS.map((col, i) => (
               <div key={i}>
                 <span
-                  sx={{
+                  style={{
                     fontWeight: 700,
                   }}
                 >
@@ -78,10 +88,10 @@ export const Footer = () => {
             ))}
           </div>
         </div>
-        <div variant='middle' sx={{ alignSelf: 'stretch' }} />
+        <div style={{ alignSelf: 'stretch' }} />
         <span
-          sx={{
-            color: theme.palette.grey[700],
+          style={{
+            color: theme.palette.text.dark[0],
             whiteSpace: 'nowrap',
             minWidth: 'max-content',
           }}

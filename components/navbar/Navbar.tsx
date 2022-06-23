@@ -10,7 +10,6 @@ import { HamburgerIcon } from './HamburgerIcon'
 import { NavItem } from './NavItem'
 import { MobileMenu } from './MobileMenu'
 import { DesktopMenu } from './DesktopMenu'
-import { LanguageSelector } from './LanguageSelector'
 import { NAVBAR_LINKS } from '@/utils/constants'
 
 const NavContainer = styled(motion.nav)(({ theme }) => ({
@@ -33,6 +32,10 @@ const NavWrapper = styled.div(({ theme }) => ({
   maxWidth: theme.breakpoints.xl,
   justifyContent: 'space-around',
   alignItems: 'center',
+
+  [`@media (max-width: ${theme.breakpoints.md})`]: {
+    justifyContent: 'space-between',
+  },
 }))
 
 const HamburguerContainer = styled.div(({ theme }) => ({
@@ -154,7 +157,6 @@ export const Navbar: React.FC = () => {
         >
           {items}
         </DesktopMenu>
-        <LanguageSelector />
       </NavWrapper>
     </NavContainer>
   )

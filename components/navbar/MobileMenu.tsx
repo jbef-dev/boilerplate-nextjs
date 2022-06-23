@@ -2,6 +2,7 @@ import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import { AnimatePresence, LayoutGroup, motion, Variants } from 'framer-motion'
 import { PropsWithChildren } from 'react'
+import { LanguageSelector } from './LanguageSelector'
 
 const MobileMenuContainer = styled(motion.div, {
   shouldForwardProp: () => true,
@@ -23,7 +24,8 @@ const MobileMenuContainer = styled(motion.div, {
   zIndex: theme.layout.zIndex.mid,
   border: 0,
   overflow: 'hidden',
-  backgroundColor: theme.palette.grey[4],
+  backgroundColor: theme.palette.grey[7],
+  fontSize: theme.font.size[6],
 
   [`@media (max-width: ${theme.breakpoints.md})`]: {
     display: 'flex',
@@ -73,6 +75,14 @@ export const MobileMenu = ({
         {...props}
       >
         <LayoutGroup id='mobile'>{children}</LayoutGroup>
+        <div
+          style={{
+            position: 'absolute',
+            top: theme.layout.header.height,
+          }}
+        >
+          <LanguageSelector />
+        </div>
       </MobileMenuContainer>
     </AnimatePresence>
   )

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { HTMLMotionProps, LayoutGroup, motion } from 'framer-motion'
 import { PropsWithChildren } from 'react'
+import { LanguageSelector } from './LanguageSelector'
 
 const DesktopMenuContainer = styled(motion.div, {
   shouldForwardProp: () => true,
@@ -22,8 +23,11 @@ export const DesktopMenu = ({
   ...props
 }: PropsWithChildren<HTMLMotionProps<'div'>>) => {
   return (
-    <DesktopMenuContainer {...props}>
-      <LayoutGroup id='desktop'>{children}</LayoutGroup>
-    </DesktopMenuContainer>
+    <>
+      <DesktopMenuContainer {...props}>
+        <LayoutGroup id='desktop'>{children}</LayoutGroup>
+      </DesktopMenuContainer>
+      <LanguageSelector />
+    </>
   )
 }

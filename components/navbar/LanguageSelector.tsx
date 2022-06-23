@@ -22,10 +22,10 @@ const LangMenuWrapper = styled(motion.div)(({ theme }) => ({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  border: theme.border.width.xs,
   // color: theme.palette.text.light[0],
   zIndex: theme.layout.zIndex.highest,
   backgroundColor: theme.palette.primary.main,
+  borderRadius: theme.border.radius.xs,
 }))
 
 const LangButton = styled(motion.button)(({ theme }) => ({
@@ -33,11 +33,9 @@ const LangButton = styled(motion.button)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  border: theme.border.width.xs,
   color: theme.palette.text.light[0],
-  padding: `${theme.size[2]} ${theme.size[3]}`,
+  padding: `${theme.spacing[1]} ${theme.spacing[3]}`,
   zIndex: theme.layout.zIndex.highest,
-  backgroundColor: theme.palette.primary.main,
   fontSize: theme.font.size[3],
   fontWeight: theme.font.weight.medium,
 }))
@@ -67,7 +65,7 @@ const LangItem = styled(motion.button)<{ open: boolean }>(
   })
 )
 
-export const LanguageSelector = () => {
+export const LanguageSelector = ({ ...props }) => {
   const router = useRouter()
   const theme = useTheme()
 

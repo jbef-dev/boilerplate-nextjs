@@ -17,6 +17,12 @@ const frMessages: IntlMessages = {
   'about.description': 'description en Français',
   'about.hero1': 'seccion hero français',
   'about.hero2': 'seccion hero 2 {kekw} français',
+
+  // Contact Page
+  'contact.title': 'Title Fr',
+  'contact.description': 'description Français',
+  'contact.hero1': 'hero français',
+  'contact.hero2': 'hero français nombre {kekw} 2',
 }
 
 export default frMessages

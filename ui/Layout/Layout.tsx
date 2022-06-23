@@ -1,3 +1,4 @@
+import { Footer } from '@/components/Footer/Footer'
 import { Navbar } from '@components/Navbar/Navbar'
 import styled from '@emotion/styled'
 
@@ -7,10 +8,7 @@ type LayoutProps = {
 
 const MainContainer = styled.div(({ theme }) => ({
   paddingTop: theme.layout.header.height,
-  display: 'flex',
-  flexDirection: 'column',
-  minHeight: `100vh-${theme.layout.footer.height}px`,
-  // minHeight: `100vh`,
+  minHeight: `calc(100vh - ${theme.layout.footer.height})`,
 }))
 
 export const Layout = ({ children }: LayoutProps) => {
@@ -18,7 +16,7 @@ export const Layout = ({ children }: LayoutProps) => {
     <>
       <Navbar />
       <MainContainer>{children}</MainContainer>
-      {/* <Footer /> */}
+      <Footer />
     </>
   )
 }
