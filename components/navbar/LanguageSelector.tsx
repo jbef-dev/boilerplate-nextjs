@@ -2,7 +2,7 @@ import useOutsideClick from '@/utils/hooks/useOusideClick'
 import { LOCALES } from '@/utils/localeConfig'
 import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
-import { AnimatePresence, LayoutGroup, motion, Variants } from 'framer-motion'
+import { LayoutGroup, motion, Variants } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { setCookie } from 'nookies'
 import { useState } from 'react'
@@ -12,6 +12,7 @@ const LangMenuContainer = styled.div(({ theme }) => ({
   position: 'relative',
   height: '100%',
   minWidth: 'max-content',
+  fontSize: theme.font.size[3],
 }))
 
 const LangMenuWrapper = styled(motion.div)(({ theme }) => ({
@@ -36,7 +37,6 @@ const LangButton = styled(motion.button)(({ theme }) => ({
   color: theme.palette.text.light[0],
   padding: `${theme.spacing[1]} ${theme.spacing[3]}`,
   zIndex: theme.layout.zIndex.highest,
-  fontSize: theme.font.size[3],
   fontWeight: theme.font.weight.medium,
 }))
 
@@ -48,24 +48,27 @@ const DropDownMenu = styled(motion.div)(({ theme }) => ({
   justifyContent: 'center',
   zIndex: theme.layout.zIndex.high,
   fontWeight: theme.font.weight.regular,
+  width: '100%',
 }))
 
-const LangItem = styled(motion.button)<{ open: boolean }>(
-  ({ theme, ...props }) => ({
-    display: 'flex',
-    opacity: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: theme.size[2],
-    color: theme.palette.text.light[0],
-    ['&:disabled']: {
-      position: 'absolute',
-      visibility: 'hidden',
-    },
-  })
-)
+const LangItem = styled(motion.button)(({ theme }) => ({
+  display: 'flex',
+  opacity: 0,
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginBottom: theme.size[2],
+  color: theme.palette.text.light[0],
+  width: '100%',
+  ['&:hover']: {
+    backgroundColor: theme.palette.primary.light,
+  },
+  ['&:disabled']: {
+    position: 'absolute',
+    visibility: 'hidden',
+  },
+}))
 
-export const LanguageSelector = ({ ...props }) => {
+export const LanguageSelector = () => {
   const router = useRouter()
   const theme = useTheme()
 
@@ -80,10 +83,10 @@ export const LanguageSelector = ({ ...props }) => {
       opacity: 1,
       height: 'auto',
       transition: {
-        when: 'beforeChildren',
-        staggerChildren: 0.1,
+        // when: 'beforeChildren',
+        staggerChildren: theme.animation.duration.fastest,
         staggerDirection: 1,
-        ...theme.animation.framer.tween,
+        ...theme.animation.framer.menuOpen,
       },
     },
     closed: {
@@ -91,10 +94,11 @@ export const LanguageSelector = ({ ...props }) => {
       opacity: 0,
       height: 0,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: theme.animation.duration.fastest,
         staggerDirection: -1,
-        when: 'afterChildren',
-        ...theme.animation.framer.tween,
+        delay: theme.animation.duration.normal,
+        // when: 'afterChildren',
+        ...theme.animation.framer.menuClose,
       },
     },
   }
@@ -103,12 +107,12 @@ export const LanguageSelector = ({ ...props }) => {
     open: {
       y: 0,
       opacity: 1,
-      transition: { ...theme.animation.framer.tween },
+      transition: { ...theme.animation.framer.normal },
     },
     closed: {
       y: '-50%',
       opacity: 0,
-      transition: { ...theme.animation.framer.tween },
+      transition: { ...theme.animation.framer.normal },
     },
   }
 
@@ -116,15 +120,7 @@ export const LanguageSelector = ({ ...props }) => {
     <LangItem
       key={locale}
       layout
-      open={open}
-      variants={langItemVariants}
-      animate
       disabled={locale === router.locale}
-      exit={{
-        y: '-100%',
-        opacity: 0,
-        transition: { ...theme.animation.framer.tween },
-      }}
       onClick={() => {
         setCookie(null, 'NEXT_LOCALE', locale, {
           maxAge: 99999999,
@@ -132,6 +128,8 @@ export const LanguageSelector = ({ ...props }) => {
         })
         router.push(router.asPath, undefined, { locale: locale })
       }}
+      animate
+      variants={langItemVariants}
     >
       {locale.toUpperCase()}
     </LangItem>
@@ -140,18 +138,18 @@ export const LanguageSelector = ({ ...props }) => {
   return (
     <LangMenuContainer>
       <LayoutGroup id='languageSelector'>
-        <LangMenuWrapper layout transition={theme.animation.framer.tween}>
+        <LangMenuWrapper layout>
           <LangButton layout ref={ref} onClick={() => setOpen(open => !open)}>
             {router.locale?.toUpperCase()}{' '}
             <MdOutlineTranslate style={{ marginLeft: theme.size[2] }} />
           </LangButton>
           <DropDownMenu
             layout
-            variants={dropdownVariants}
-            initial={false}
+            initial='closed'
             animate={open ? 'open' : 'closed'}
+            variants={dropdownVariants}
           >
-            <AnimatePresence>{items}</AnimatePresence>
+            {items}
           </DropDownMenu>
         </LangMenuWrapper>
       </LayoutGroup>
