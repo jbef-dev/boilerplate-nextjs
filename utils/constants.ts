@@ -1,4 +1,4 @@
-import { IntlMessages } from './localeConfig'
+import { IntlMessages } from './locale/localeConfig'
 
 export const APP_CONFIG = {
   site_name: 'boilerplate-nextjs',

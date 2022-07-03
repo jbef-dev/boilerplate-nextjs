@@ -1,8 +1,10 @@
 const duration = {
-  fastest: 0.19,
+  fastest: 0.1,
+  veryFast: 0.19,
   fast: 0.28,
   normal: 0.35,
   slow: 0.45,
+  long: 2,
 }
 
 const bounce = {

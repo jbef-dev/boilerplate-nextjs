@@ -1,6 +1,6 @@
-import esMessages from '@/lang/es'
-import enMessages from '@/lang/en'
-import frMessages from '@/lang/fr'
+import esMessages from './es'
+import enMessages from './en'
+import frMessages from './fr'
 
 // using as const makes it so that only the values provided are accepted
 export const LOCALES = ['en', 'es', 'fr'] as const

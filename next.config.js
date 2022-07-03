@@ -10,13 +10,7 @@ const nextConfig = {
   // As per official template
   // only in canary build
   // https://github.com/vercel/next.js/blob/canary/examples/with-emotion-swc/next.config.js
-  // compiler: {
-  //   emotion: true,
-  // },
-  // As per NextJS documentation:
-  // EXPERIMENTAL
-  // https://nextjs.org/docs/advanced-features/compiler#unsupported-features
-  experimental: {
+  compiler: {
     emotion: true,
   },
 }

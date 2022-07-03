@@ -1,5 +1,5 @@
 import useOutsideClick from '@/utils/hooks/useOusideClick'
-import { LOCALES } from '@/utils/localeConfig'
+import { LOCALES } from '@/utils/locale/localeConfig'
 import { useTheme } from '@emotion/react'
 import styled from '@emotion/styled'
 import { LayoutGroup, motion, Variants } from 'framer-motion'

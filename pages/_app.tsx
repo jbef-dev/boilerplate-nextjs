@@ -3,9 +3,9 @@ import type { AppProps } from 'next/app'
 import { Layout } from '@ui/Layout/Layout'
 import { IntlProvider } from 'react-intl'
 import { useRouter } from 'next/router'
-import { messages, Locales } from '@/utils/localeConfig'
+import { messages, Locales } from '@/utils/locale/localeConfig'
 import { ThemeProvider } from '@emotion/react'
-import { theme } from 'styles/theme'
+import { theme } from '@/styles/theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { locale, defaultLocale } = useRouter()

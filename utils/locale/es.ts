@@ -1,4 +1,4 @@
-import { IntlMessages } from '@/utils/localeConfig'
+import { IntlMessages } from './localeConfig'
 
 const esMessages: IntlMessages = {
   // Navbar
