@@ -13,6 +13,15 @@ const nextConfig = {
   compiler: {
     emotion: true,
   },
+  experimental: {
+    images: {
+      allowFutureImage: true,
+      remotePatterns: [
+        { protocol: 'https', hostname: '**.cdninstagram.com' },
+        { protocol: 'http', hostname: '**loremflickr.com' }, // REMoVE AFTER TESTING
+      ],
+    },
+  },
 }
 
 module.exports = nextConfig

@@ -2,26 +2,6 @@ import customAnimations from './customAnimations'
 import palette from './palette'
 import font from './font'
 
-// const sizes = {
-//   0: '0px',
-//   1: '4px',
-//   2: '8px',
-//   3: '12px',
-//   4: '16px',
-//   5: '24px',
-//   6: '32px',
-//   7: '48px',
-//   8: '64px',
-//   9: '96px',
-//   10: '128px',
-//   11: '192px',
-//   12: '256px',
-//   13: '384px',
-//   14: '512px',
-//   15: '640px',
-//   16: '768px',
-// }
-
 const sizes = {
   0: '0em',
   1: '0.25em',
@@ -89,6 +69,9 @@ export const theme = {
     },
   },
   palette: palette,
+  shadows:{
+    0: '0px 7px 20px rgba(43, 8, 37, 0.2)',
+  },
   size: sizes,
   spacing: sizes,
 }

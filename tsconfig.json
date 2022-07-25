@@ -39,7 +39,11 @@
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
-      "@ui/*": ["./ui/*"]
+      "@config/*": ["./config/*"],
+      "@hooks/*": ["./hooks/*"],
+      "@styles/*": ["./styles/*"],
+      "@ui/*": ["./components/ui/*"],
+      "@utils/*": ["./utils/*"]
     },
     "plugins": [
       {

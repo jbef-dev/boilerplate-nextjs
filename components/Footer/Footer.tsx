@@ -1,7 +1,7 @@
 import { useTheme } from '@emotion/react'
 import Image from 'next/image'
 import { FOOTER_GROUPS, CONTACT_INFO } from '@/utils/constants'
-import logo from '@/public/jbef_logo.png'
+import logo from '@/public/logo.svg'
 
 export const Footer = () => {
   const theme = useTheme()
@@ -23,6 +23,7 @@ export const Footer = () => {
           justifyContent: 'space-evenly',
           maxWidth: theme.breakpoints.xl,
           height: '100%',
+          overflow: 'hidden',
         }}
       >
         <div
@@ -31,7 +32,7 @@ export const Footer = () => {
             width: '100%',
             alignItems: 'center',
             justifyContent: 'space-around',
-            [`@media (maxWidth: ${theme.breakpoints.md})`]: {
+            [`@media (max-width: ${theme.breakpoints.md})`]: {
               justifyContent: 'center',
             },
           }}
@@ -67,7 +68,7 @@ export const Footer = () => {
               display: 'flex',
               flexWrap: 'wrap',
               gap: theme.spacing[8],
-              [`@media (maxWidth: ${theme.breakpoints.md})`]: {
+              [`@media (max-width: ${theme.breakpoints.md})`]: {
                 display: 'none',
               },
             }}
