@@ -1,4 +1,4 @@
-import { IG_PostType } from '@server/getInstagramPosts'
+import { IG_PostType } from '@util/getInstagramPosts'
 import { useTheme } from '@emotion/react'
 import { Modal } from '@ui/Modal/Modal'
 import styled from '@emotion/styled'
@@ -6,9 +6,9 @@ import Image from 'next/future/image'
 import { motion, Variants } from 'framer-motion'
 import { useState } from 'react'
 import React from 'react'
-import { Carousel } from '../ui/Carousel/Carousel'
+import { Carousel } from '@ui/Carousel/Carousel'
 
-const ElImage = styled(motion(Image))(() => ({
+const ElImage = styled(Image)(() => ({
   position: 'relative',
   // objectFit: 'contain',
   width: '100%',
@@ -26,7 +26,7 @@ const ElTextContainer = styled(motion.div)(() => ({
   height: '100%',
 }))
 
-const ElTextWrapper = styled(motion.div)(({ theme }) => ({
+const ElTextWrapper = styled('div')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -43,7 +43,7 @@ const ModalText = styled('div')(({ theme }) => ({
   width: '100%',
   padding: theme.spacing[4],
   backgroundColor: theme.palette.surface.light[0],
-  borderRadius: `0 0 ${theme.border.radius.sm} ${theme.border.radius.sm}`,
+  borderRadius: `0 0 ${theme.border.radius.md} ${theme.border.radius.md}`,
 }))
 
 const ModalImage = styled(Image)(({ theme }) => ({
@@ -53,7 +53,7 @@ const ModalImage = styled(Image)(({ theme }) => ({
   width: '100%',
   height: '100%',
   maxHeight: '70vh',
-  borderRadius: `${theme.border.radius.sm} ${theme.border.radius.sm} 0 0`,
+  borderRadius: `${theme.border.radius.md} ${theme.border.radius.md} 0 0`,
 }))
 
 interface CarouselProps {
@@ -113,14 +113,13 @@ export const IGCarousel = ({ IG_posts }: CarouselProps) => {
             toggleModal()
           }}
           minwidth={theme.spacing[12]}
-          midwidth={'40vw'}
+          midwidth={'75vw'}
           maxwidth={theme.spacing[14]}
           autoScroll
         >
           {IG_posts.map(item => (
             <React.Fragment key={item.id}>
               <ElImage
-                layout
                 src={item.media_url}
                 alt={item.caption}
                 height={500}

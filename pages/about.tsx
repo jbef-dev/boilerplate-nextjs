@@ -1,4 +1,4 @@
-import { PageContainer } from '@/ui/Container/PageContainer'
+import { PageContainer } from '@ui/Containers/PageContainer'
 import type { NextPage } from 'next'
 import { useIntl } from 'react-intl'
 
@@ -7,13 +7,13 @@ const Home: NextPage = () => {
 
   return (
     <PageContainer
-      title={intl.formatMessage({ id: 'about.title' })}
-      description={intl.formatMessage({ id: 'about.description' })}
+      title={intl.formatMessage({ id: 'about.page.title' })}
+      description={intl.formatMessage({ id: 'about.page.description' })}
     >
       <h1 style={{ fontSize: '50px' }}>
         {/* Welcome to <a href="https://nextjs.org">Next.js!</a> */}
         {/* <FormattedMessage id='index.hero1' /> */}
-        {intl.formatMessage({ id: 'index.hero2' }, { kekw: 'lel' })}
+        {intl.formatMessage({ id: 'index.page.hero2' }, { kekw: 'lel' })}
       </h1>
 
       <p>

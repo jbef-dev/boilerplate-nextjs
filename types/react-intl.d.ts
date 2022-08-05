@@ -1,4 +1,4 @@
-import { IntlMessages, Locales } from '@utils/locale/localeConfig'
+import { IntlMessages, Locales } from '@config/locale/localeConfig'
 
 // strongly typed ids for function and component as per docs:
 // https://formatjs.io/docs/react-intl/

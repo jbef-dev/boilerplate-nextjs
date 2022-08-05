@@ -1,17 +1,38 @@
-import { PageContainer } from '@/ui/Container/PageContainer'
+import { PageContainer } from '@ui/Containers/PageContainer'
+import { useTheme } from '@emotion/react'
 import type { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useIntl } from 'react-intl'
+import { Button } from '@ui/Button/Button'
+import { FaTelegram } from 'react-icons/fa'
 
 const Home: NextPage = () => {
   const intl = useIntl()
+  const router = useRouter()
+  const theme = useTheme()
 
   return (
     <PageContainer title={'title'} description={'desc'}>
       <h1 style={{ fontSize: '20px' }}>
         {/* Welcome to <a href="https://nextjs.org">Next.js!</a> */}
         {/* <FormattedMessage id='index.hero1' /> */}
-        {intl.formatMessage({ id: 'index.hero2' }, { kekw: 'lel' })}
+        {intl.formatMessage({ id: 'index.page.hero2' }, { kekw: 'lel' })}
       </h1>
+
+      <Button
+        icon
+        // icon={<FaTelegram fontSize={theme.font.size[6]} />}
+        flavor='basic'
+        size='md'
+        // btntype='square'
+        bgColor={theme.palette.primary.main}
+        // bglight={theme.palette.primary.lightest}
+        // bgdark={theme.palette.primary.darkest}
+        // bgHover={theme.palette.primary.lightest}
+        onClick={() => router.push('/contact')}
+      >
+        Contact
+      </Button>
 
       <p>
         Get started by editing <code>pages/index.tsx</code>

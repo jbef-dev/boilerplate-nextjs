@@ -22,7 +22,7 @@ const useOutsideClick = (callback: (...props: any) => void, open?: boolean) => {
     }
   }, [ref, open])
 
-  return { ref }
+  return [ref] as const
 }
 
 export default useOutsideClick

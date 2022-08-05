@@ -3,23 +3,23 @@ import palette from './palette'
 import font from './font'
 
 const sizes = {
-  0: '0em',
-  1: '0.25em',
-  2: '0.5em',
-  3: '0.75em',
-  4: '1em',
-  5: '1.5em',
-  6: '2em',
-  7: '3em',
-  8: '4em',
-  9: '6em',
-  10: '8em',
-  11: '12em',
-  12: '16em',
-  13: '24em',
-  14: '32em',
-  15: '48em',
-  16: '64em',
+  0: '0rem',
+  1: '0.25rem',
+  2: '0.5rem',
+  3: '0.75rem',
+  4: '1rem',
+  5: '1.5rem',
+  6: '2rem',
+  7: '3rem',
+  8: '4rem',
+  9: '6rem',
+  10: '8rem',
+  11: '12rem',
+  12: '16rem',
+  13: '24rem',
+  14: '32rem',
+  15: '48rem',
+  16: '64rem',
 }
 
 export const theme = {
@@ -27,9 +27,9 @@ export const theme = {
     radius: {
       xs: '3px',
       sm: '4px',
-      md: '6px',
-      lg: '8px',
-      xl: '10px',
+      md: '7px',
+      lg: '12px',
+      xl: '16px',
     },
 
     width: {
@@ -69,7 +69,7 @@ export const theme = {
     },
   },
   palette: palette,
-  shadows:{
+  shadows: {
     0: '0px 7px 20px rgba(43, 8, 37, 0.2)',
   },
   size: sizes,

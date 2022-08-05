@@ -1,10 +1,11 @@
 import styled from '@emotion/styled'
 import { useIntl } from 'react-intl'
-import image_hero from '@/public/dr_abel_martinez.png'
+import image_hero from '@/public/image_hero.png'
 import Image from 'next/future/image'
-import { useRouter } from 'next/router'
 import { useTheme } from '@emotion/react'
 import { Button } from '@ui/Button/Button'
+import Link from 'next/link'
+import { FaTelegram } from 'react-icons/fa'
 
 const HeroContainer = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -13,10 +14,13 @@ const HeroContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   width: '100%',
   justifyContent: 'center',
-  height: `clamp(${theme.size[10]}, 60vh, ${theme.size[15]})`,
+  height: `clamp(${theme.size[14]}, 60vw, ${theme.size[15]})`,
   backgroundColor: theme.palette.surface.light[1],
   overflow: 'hidden',
   clipPath: 'polygon(100% 0, 100% 93%, 50% 100%, 0 93%, 0 0)',
+  [`@media (max-width: ${theme.breakpoints.md})`]: {
+    height: `calc(${theme.size[14]} + ${theme.spacing[8]})`,
+  },
 }))
 
 const HeroWrapper = styled('div')(({ theme }) => ({
@@ -35,7 +39,7 @@ const HeroTextContainer = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'start',
-  // left: `clamp(${theme.spacing[6]}, 10vw, ${theme.spacing[11]} )`,
+  left: `clamp(${theme.spacing[5]}, 5vw, ${theme.spacing[11]} )`,
   gap: theme.spacing[3],
   zIndex: theme.layout.zIndex.low,
   maxWidth: `min(${theme.size[14]}, 50% )`,
@@ -49,7 +53,7 @@ const HeroTextContainer = styled('div')(({ theme }) => ({
 
 const HeroTitle = styled('h1')(({ theme }) => ({
   color: theme.palette.text.dark[0],
-  fontSize: `clamp(${theme.font.size[9]}, 8vw, ${theme.font.size[11]})`,
+  fontSize: `clamp(${theme.font.size[9]}, 8vw, ${theme.font.size[10]})`,
   fontWeight: theme.font.weight.extrabold,
   lineHeight: 1.1,
   margin: 0,
@@ -74,8 +78,7 @@ const HeroImageContainer = styled('div')(({ theme }) => ({
   zIndex: 0,
   [`@media (max-width: ${theme.breakpoints.md})`]: {
     position: 'absolute',
-    // paddingTop: 0,
-    left: '25vw',
+    left: '10vw',
     width: '100%',
     ['&:after']: {
       content: '""',
@@ -100,7 +103,6 @@ const HeroImage = styled(Image)(() => ({
 
 export const Hero = () => {
   const intl = useIntl()
-  const router = useRouter()
   const theme = useTheme()
 
   return (
@@ -108,20 +110,24 @@ export const Hero = () => {
       <HeroWrapper>
         <HeroTextContainer>
           <HeroTitle>
-            {intl.formatMessage({ id: 'index.hero1' }, { br: <br /> })}
+            {intl.formatMessage({ id: 'index.page.hero1' }, { br: <br /> })}
           </HeroTitle>
           <HeroSubtitle>
-            {intl.formatMessage({ id: 'index.hero2' }, { kekw: 'Español' })}
+            {intl.formatMessage(
+              { id: 'index.page.hero2' },
+              { kekw: 'Español' }
+            )}
           </HeroSubtitle>
-          <Button
-            icon
-            btnVariant='basic'
-            bgColor={theme.palette.primary.main}
-            bgHover={theme.palette.primary.lightest}
-            onClick={() => router.push('/contact')}
-          >
-            Contact
-          </Button>
+          <Link href='/contact' passHref>
+            <Button
+              flavor='squared'
+              size='md'
+              bgColor={theme.palette.primary.main}
+              icon={<FaTelegram />}
+            >
+              Contact
+            </Button>
+          </Link>
         </HeroTextContainer>
         <HeroImageContainer>
           <HeroImage

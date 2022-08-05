@@ -1,6 +1,6 @@
 import { useTheme } from '@emotion/react'
 import Image from 'next/image'
-import { FOOTER_GROUPS, CONTACT_INFO } from '@/utils/constants'
+import { FOOTER_GROUPS, CONTACT_INFO } from '@config/constants/pageContent'
 import logo from '@/public/logo.svg'
 
 export const Footer = () => {

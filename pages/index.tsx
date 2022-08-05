@@ -2,7 +2,7 @@ import { Hero } from '@/components/Hero/Hero'
 import { IGCarousel } from '@/components/IGCarousel/IGCarousel'
 import { FlexContainer } from '@ui/Containers/FlexContainer'
 import { PageContainer } from '@ui/Containers/PageContainer'
-import { getInstagramPosts } from '@utils/getInstagramPosts'
+import { getInstagramPosts } from '@util/getInstagramPosts'
 import { useTheme } from '@emotion/react'
 import type { InferGetStaticPropsType, NextPage } from 'next'
 import { useIntl } from 'react-intl'
@@ -10,6 +10,8 @@ import { Button } from '@ui/Button/Button'
 import { FaPhoneAlt, FaRegCalendarAlt } from 'react-icons/fa'
 import { useRouter } from 'next/router'
 import { ServicesGrid } from '@/components/ServicesGrid/ServicesGrid'
+import { FeatureShowcase } from '@components/FeatureShowcase/FeatureShowcase'
+// import { Button } from '@mui/material'
 
 export const getStaticProps = async () => {
   const IG_posts = await getInstagramPosts()
@@ -30,18 +32,20 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
   return (
     <>
       <PageContainer
-        title={intl.formatMessage({ id: 'index.title' })}
-        description={intl.formatMessage({ id: 'index.description' })}
-        gap={theme.spacing[4]}
+        title={intl.formatMessage({ id: 'index.page.title' })}
+        description={intl.formatMessage({ id: 'index.page.description' })}
+        gap={theme.spacing[8]}
+        gapsm={theme.spacing[6]}
         style={{ paddingTop: 0 }}
       >
         <Hero />
 
-        <FlexContainer px='0' py='0' pxsm='0' pysm='0' centerContent>
+        <FlexContainer grow py='0' centerContent>
           <FlexContainer
-            // px='0'
-            // py='0'
+            grow
             centerContent
+            p='0'
+            // px={theme.spacing[2]}
             style={{
               flexDirection: 'column',
               gap: theme.spacing[4],
@@ -50,14 +54,14 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
           >
             <h2
               style={{
-                fontSize: theme.font.size[8],
+                fontSize: theme.font.size[7],
                 fontWeight: theme.font.weight.bold,
                 color: theme.palette.text.dark[0],
                 margin: 0,
                 textAlign: 'center',
               }}
             >
-              {intl.formatMessage({ id: 'index.section1' })}
+              {intl.formatMessage({ id: 'index.page.section1' })}
               <FaRegCalendarAlt
                 style={{
                   marginLeft: theme.spacing[2],
@@ -65,21 +69,24 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
                 }}
               />
             </h2>
+
             <Button
               icon={<FaPhoneAlt />}
-              btnVariant='basic'
+              flavor='basic'
               onClick={() => router.push('tel:+606516718')}
             >
               {intl.formatMessage({ id: 'button.call' })}
             </Button>
+
+            <FeatureShowcase />
           </FlexContainer>
         </FlexContainer>
 
-        <FlexContainer px='0' pxsm='0' py='0' centerContent>
+        <FlexContainer grow p='0' centerContent>
           <IGCarousel IG_posts={IG_posts} />
         </FlexContainer>
 
-        <FlexContainer px={theme.spacing[4]} centerContent>
+        <FlexContainer py='0' grow centerContent>
           <ServicesGrid />
         </FlexContainer>
 

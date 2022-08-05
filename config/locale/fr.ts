@@ -1,4 +1,4 @@
-import { IntlMessages } from '@/utils/locale/localeConfig'
+import { IntlMessages } from '@config/locale/localeConfig'
 
 const frMessages: IntlMessages = {
   // Navbar
@@ -10,28 +10,40 @@ const frMessages: IntlMessages = {
   'navbar.menu.close': 'Fermer menu',
 
   // Index Page
-  'index.title': 'testeando Español',
-  'index.description': 'descripción en Español',
-  'index.hero1': 'Vos dentiste de {br} confiance',
-  'index.hero2': 'seccion hero 2 {kekw} français',
-  'index.section1': 'Prenez un rendez-vous sans engagement',
+  'index.page.title': 'testeando Español',
+  'index.page.description': 'descripción en Español',
+  'index.page.hero1': 'Vos dentiste de {br} confiance',
+  'index.page.hero2': 'seccion hero 2 {kekw} français',
+  'index.page.section1': 'Prenez un rendez-vous sans engagement',
 
   // About Page
-  'about.title': 'Title Français',
-  'about.description': 'description en Français',
-  'about.hero1': 'Dentist de {br} confiance',
-  'about.hero2': 'seccion hero 2 {kekw} français',
+  'about.page.title': 'Title Français',
+  'about.page.description': 'description en Français',
+  'about.page.hero1': 'Dentist de {br} confiance',
+  'about.page.hero2': 'seccion hero 2 {kekw} français',
 
   // Contact Page
-  'contact.title': 'Title Fr',
-  'contact.description': 'description Français',
-  'contact.hero1': 'hero français',
-  'contact.hero2': 'hero français nombre {kekw} 2',
+  'contact.page.title': 'Title Fr',
+  'contact.page.description': 'description Français',
+  'contact.page.header': 'hero français',
+  'contact.page.hero2': 'hero français nombre {kekw} 2',
 
   // Common
-  'button.contact': 'Contact',
+  'button.contact': 'Contacte',
   'button.close': 'Fermer',
   'button.call': 'Appeler',
+  'button.moreInfo': 'Más info',
+
+  // ///////////////////////////////////////////
+  // CONTENT
+  // ///////////////////////////////////////////
+  // Services
+  'services.implantologia.title': 'Implantología',
+  'services.implantologia.content':
+    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias',
+  'services.odontologia.title': 'Odontología',
+  'services.odontologia.content':
+    'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Qui dicta minus molestiae vel beatae natus eveniet ratione temporibus aperiam harum alias officiis assumenda',
 }
 
 export default frMessages

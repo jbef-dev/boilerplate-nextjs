@@ -42,8 +42,8 @@
       "@config/*": ["./config/*"],
       "@hooks/*": ["./hooks/*"],
       "@styles/*": ["./styles/*"],
-      "@ui/*": ["./components/ui/*"],
-      "@utils/*": ["./utils/*"]
+      "@ui/*": ["./ui/*"],
+      "@util/*": ["./util/*"]
     },
     "plugins": [
       {
