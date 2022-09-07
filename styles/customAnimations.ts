@@ -1,4 +1,4 @@
-import { Transition } from 'framer-motion'
+import type { Transition } from 'framer-motion'
 
 const duration = {
   fastest: 0.1,
@@ -33,16 +33,19 @@ const damping = {
   max: 50,
 }
 
+const cssAnimations = {
+  slow: '1s ease-in-out',
+  standard: '0.35s ease-in-out',
+  fast: '0.21s ease-in-out',
+  fadeColor: '0.15s ease-in-out',
+}
+
 const customAnimations = {
   duration: duration,
   bounce: bounce,
   stiffness: stiffness,
   damping: damping,
-  css: {
-    slow: '1s ease-in-out',
-    standard: '0.35s ease-in-out',
-    fast: '0.21s ease-in-out',
-  },
+  css: cssAnimations,
   framer: {
     tweenFast: { type: 'tween', duration: duration.fastest },
     tween: { type: 'tween', duration: duration.fast },

@@ -1,11 +1,9 @@
-import '@/styles/globals.css'
+import '@styles/globals.css'
 import type { AppProps } from 'next/app'
 import { Layout } from '@components/Layout/Layout'
 import { IntlProvider } from 'react-intl'
 import { useRouter } from 'next/router'
 import { messages, Locales } from '@config/locale/localeConfig'
-import { ThemeProvider } from '@emotion/react'
-import { theme } from '@/styles/theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { locale, defaultLocale } = useRouter()
@@ -16,11 +14,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       defaultLocale={defaultLocale}
       messages={messages[locale as Locales]}
     >
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </IntlProvider>
   )
 }

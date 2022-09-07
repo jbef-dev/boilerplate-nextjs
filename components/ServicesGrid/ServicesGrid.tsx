@@ -1,12 +1,11 @@
 import { theme } from '@/styles/theme'
-import { useTheme } from '@emotion/react'
-import styled from '@emotion/styled'
 import { ReactNode } from 'react'
 import { FaHandHoldingMedical, FaPlus, FaTeeth, FaTooth } from 'react-icons/fa'
 import { GiToothbrush } from 'react-icons/gi'
 import { Button } from '@ui/Button/Button'
 import { useIntl } from 'react-intl'
 import { IntlMessages } from '@/config/locale/localeConfig'
+import Link from 'next/link'
 
 ////////////////////////////////////////////
 // Service Cells
@@ -45,71 +44,32 @@ export const SERVICE_CELLS: IServiceCell[] = [
   },
 ]
 
-const GridContainer = styled('div')(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(3,1fr)',
-  // padding: theme.spacing[4],
-  gap: `clamp(${theme.spacing[4]}, 3vw, ${theme.spacing[8]})`,
-  [`@media (max-width: ${theme.breakpoints.md})`]: {
-    gridTemplateColumns: 'repeat(2,1fr)',
-  },
-  [`@media (max-width: ${theme.breakpoints.sm})`]: {
-    gridTemplateColumns: '1fr',
-  },
-}))
-
-const CellContainer = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: `${theme.spacing[5]} ${theme.spacing[6]}`,
-  gap: theme.spacing[2],
-  alignItems: 'start',
-  backgroundColor: theme.palette.surface.light[0],
-  boxShadow: 'none',
-  borderRadius: theme.border.radius.md,
-  maxWidth: `calc(${theme.breakpoints.xl} / 4)`,
-  transition: theme.animation.css.standard,
-  // textOverflow: 'wrap',
-  ['&:hover, &:active']: {
-    boxShadow: theme.shadows[0],
-  },
-}))
-
 export const ServicesGrid = () => {
-  const theme = useTheme()
   const intl = useIntl()
 
   return (
-    <GridContainer>
+    <div className='grid w-full max-w-screen-xl grid-cols-1 place-items-center gap-6 px-2 md:grid-cols-2 md:p-6'>
       {SERVICE_CELLS.map((item, i) => (
-        <CellContainer key={i}>
-          <div
-            style={{
-              display: 'flex',
-              fontSize: theme.font.size[8],
-            }}
-          >
+        <div
+          className='flex w-10/12 flex-col items-center gap-6 rounded border-gray-50 py-6 transition-all duration-300 hover:shadow-lg md:w-full md:items-start md:px-5'
+          key={i}
+        >
+          <div className='flex items-center gap-3 text-4xl'>
             {item.icon}
+            <span className='text-3xl font-bold'>
+              {intl.formatMessage({ id: item.title })}
+            </span>
           </div>
-          <div
-            style={{
-              margin: 0,
-              fontSize: theme.font.size[6],
-              fontWeight: theme.font.weight.bold,
-            }}
-          >
-            {/* TITLE */}
-            {intl.formatMessage({ id: item.title })}
-          </div>
-          <div style={{ fontSize: theme.font.size[4] }}>
-            {/* CONTENT */}
+          <div className='text-lg'>
             {intl.formatMessage({ id: item.content })}
           </div>
-          <Button flavor='basic' icon={<FaPlus />}>
-            {intl.formatMessage({ id: 'button.moreInfo' })}
-          </Button>
-        </CellContainer>
+          <Link href={'/services'} scroll={true}>
+            <Button flavor='basic' icon={<FaPlus />}>
+              {intl.formatMessage({ id: 'button.moreInfo' })}
+            </Button>
+          </Link>
+        </div>
       ))}
-    </GridContainer>
+    </div>
   )
 }

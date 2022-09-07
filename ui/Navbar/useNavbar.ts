@@ -17,11 +17,14 @@ export const useNavbar = () => {
   const toggleOpen = () => setOpen(o => !o)
 
   const navbarControl = useCallback(() => {
-    const increment = 150
+    const increment = 140
+    const topThreshold = 50
     if (typeof window !== 'undefined') {
+      setY(window.scrollY)
+      if (y <= 0 && y < topThreshold) setShow(true)
       if (window.scrollY > y) {
         setScrollDir('down')
-        if (window.scrollY > deltaY + increment) {
+        if (window.scrollY > deltaY + increment && y > topThreshold) {
           setShow(false)
         }
       } else {
@@ -30,13 +33,16 @@ export const useNavbar = () => {
           setShow(true)
         }
       }
-      setY(window.scrollY)
     }
   }, [y, deltaY])
 
   useEffect(() => {
     show ? setActive(router.asPath) : setActive(undefined)
   }, [show, router.asPath])
+
+  useEffect(() => {
+    setShow(true)
+  }, [router.asPath])
 
   useEffect(() => {
     window.addEventListener('scroll', navbarControl)

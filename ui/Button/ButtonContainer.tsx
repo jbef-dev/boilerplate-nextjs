@@ -1,74 +1,37 @@
-import { CSSProperties } from 'react'
-import styled from '@emotion/styled'
-import { isValidMotionProp, motion } from 'framer-motion'
-import isPropValid from '@emotion/is-prop-valid'
-import { Theme } from '@emotion/react'
-import { ButtonFlavors, ButtonProps, ButtonSizes, FlavorCSS } from './types'
-import { NotUndefined } from '@util/utilityTypes'
+import type { PropsWithChildren } from 'react'
+import { ButtonFlavors, ButtonSizes } from './types'
+import React from 'react'
+import clsx, { ClassValue } from 'clsx'
 
 export interface ButtonContainerProps {
   flavor: ButtonFlavors
-  size: NotUndefined<ButtonProps['size']>
-  bgColor: NotUndefined<ButtonProps['bgColor']>
+  size: ButtonSizes
+  isLoading: boolean
 }
 
-export const ButtonContainer = styled(motion.div, {
-  shouldForwardProp: (p: string) => isValidMotionProp(p) || isPropValid(p),
-})<ButtonContainerProps>(
-  ({ bgColor, theme }) => ({
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: theme.palette.text.light[0],
-    backgroundColor: bgColor,
-    borderRadius: theme.border.radius.sm,
-    overflow: 'hidden',
-    cursor: 'pointer',
-  }),
-  ({ flavor, bgColor, size, theme }) =>
-    containerFlavors({ flavor, bgColor, size }, theme)[flavor]
-)
+const flavors: { [k in ButtonFlavors]: ClassValue } = {
+  basic: clsx('bg-primary-main text-white rounded hover:bg-primary-darkest'),
+  squared: undefined,
+  outlined: clsx(
+    'rounded ring-2 text-primary-darkest ring-primary-main hover:bg-white/10 hover:ring-4'
+  ),
+}
 
-const containerFlavors = (
-  { size, bgColor }: ButtonContainerProps,
-  theme: Theme
-): FlavorCSS => {
-  const spacingX: {
-    [k in ButtonSizes]: CSSProperties['gap']
-  } = {
-    sm: theme.spacing[3],
-    md: theme.spacing[4],
-    lg: theme.spacing[5],
-  }
-  return {
-    basic: {
-      padding: `${theme.spacing[2]} ${spacingX[size]}`,
-      gap: spacingX[size],
-    },
-    squared: {
-      justifyContent: 'space-between',
-      padding: 0,
-    },
-    outlined: {
-      padding: `${theme.spacing[2]} ${spacingX[size]}`,
-      gap: spacingX[size],
-      backgroundColor: 'unset',
-      color: theme.palette.primary.main,
-      // this allows for the border to be on the inside
-      // and not enlarge the button unnecessarily
-      ['&:after']: {
-        content: '""',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        borderRadius: 'inherit',
-        borderWidth: '2px',
-        borderStyle: 'solid',
-        borderColor: bgColor,
-      },
-    },
-  }
+export const ButtonContainer = (
+  props: PropsWithChildren<ButtonContainerProps>
+) => {
+  const { isLoading, flavor, children, ...rest } = props
+
+  return (
+    <div
+      className={clsx(
+        'group flex cursor-pointer items-center justify-center gap-4 px-4 py-2',
+        'duration-200 ease-in-out',
+        flavors[flavor]
+      )}
+      {...rest}
+    >
+      {children}
+    </div>
+  )
 }

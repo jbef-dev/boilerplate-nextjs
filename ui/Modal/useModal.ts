@@ -9,6 +9,7 @@ type useModalProps = {
 export const useModal = ({ open, handleClose }: useModalProps) => {
   useEffect(() => {
     document.body.style.overflowY = open ? 'hidden' : 'scroll'
+    document.body.style.overflowX = 'hidden'
   }, [open])
 
   const onOverlayClick = (e: React.MouseEvent | React.TouchEvent) => {

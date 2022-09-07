@@ -1,15 +1,10 @@
-import { LayoutGroup, Variants } from 'framer-motion'
+import { LayoutGroup, motion, Variants } from 'framer-motion'
 import { PropsWithChildren } from 'react'
-import { useTheme } from '@emotion/react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { useCarouselFixed } from './useFixedCarousel'
 import { CarouselProps } from '../Carousel'
-import {
-  CarouselContainer,
-  CarouselWrapper,
-  ItemContainer,
-  NavButton,
-} from '../Carousel.styles'
+import clsx from 'clsx'
+import customAnimations from '@/styles/customAnimations'
 
 interface CarouselFixedVariantProps<T>
   extends Omit<CarouselProps<T>, 'variant'> {}
@@ -17,14 +12,12 @@ interface CarouselFixedVariantProps<T>
 export const FixedCarousel = <T extends Record<string, any>>(
   props: PropsWithChildren<CarouselFixedVariantProps<T>>
 ) => {
-  const theme = useTheme()
-
   const {
     items,
-    minwidth,
-    midwidth,
-    maxwidth,
-    elementGap = theme.spacing[0],
+    minwidth = '16rem',
+    midwidth = '75vw',
+    maxwidth = '32rem',
+    elementGap = '0rem',
     onElementClick,
     children,
     autoScroll,
@@ -60,50 +53,54 @@ export const FixedCarousel = <T extends Record<string, any>>(
 
   return (
     <>
-      <CarouselContainer {...rest}>
-        <NavButton
-          variants={{ hover: { x: '-3px' } }}
-          flavor='basic'
-          whileHover='hover'
-          whileTap='hover'
-          direction='left'
+      <div
+        className='relative flex w-full max-w-screen-2xl items-center overflow-hidden'
+        {...rest}
+      >
+        <button
+          className='absolute top-0 left-5 bottom-0 z-10 my-auto h-min rounded bg-purple-400 p-2 text-lg transition-all hover:-translate-x-1 hover:scale-125'
           onClick={() => {
             handleNavClick('left')
             setCounter(undefined)
           }}
         >
           <FaChevronLeft />
-        </NavButton>
-        <NavButton
-          variants={{ hover: { x: '3px' } }}
-          flavor='basic'
-          whileHover='hover'
-          whileTap='hover'
-          direction='right'
+        </button>
+        <button
+          className='absolute top-0 right-5 bottom-0 z-10 my-auto h-min rounded bg-purple-400 p-2 text-lg transition-all hover:translate-x-1 hover:scale-125'
           onClick={() => {
             handleNavClick('right')
             setCounter(undefined)
           }}
         >
           <FaChevronRight />
-        </NavButton>
+        </button>
         <LayoutGroup id='carousel'>
-          <CarouselWrapper
+          <motion.div
+            className={clsx([
+              'relative flex cursor-grab pt-5 pb-5',
+              { 'gap-2': !elementGap },
+            ])}
+            style={{
+              left: `calc(50% - (0.5 * ${elementSizeCss}))`,
+            }}
             drag='x'
             dragSnapToOrigin
             dragTransition={{
-              bounceStiffness: theme.animation.stiffness.max,
-              bounceDamping: theme.animation.damping.max,
+              bounceStiffness: customAnimations.stiffness.max,
+              bounceDamping: customAnimations.damping.max,
             }}
-            elementSize={elementSizeCss}
-            elementGap={elementGap}
             onDrag={handleDrag}
-            transition={theme.animation.framer.fast}
+            transition={customAnimations.framer.fast}
             onDragEnd={(_, info) => handleDragEnd(info)}
           >
             {items &&
               children.map((child, index) => (
-                <ItemContainer
+                <motion.div
+                  className='group relative flex h-full cursor-pointer overflow-hidden rounded shadow '
+                  style={{
+                    width: elementSizeCss,
+                  }}
                   key={items[index]?.id}
                   initial={{ left: 0, scale: 1 }}
                   animate={{
@@ -112,8 +109,7 @@ export const FixedCarousel = <T extends Record<string, any>>(
                     } *(${elementSizeCss} + ${elementGap}))`,
                     scale: position === index ? 1 : 0.85,
                   }}
-                  transition={theme.animation.framer.normal}
-                  elementSize={elementSizeCss}
+                  transition={customAnimations.framer.normal}
                   variants={containerVariants}
                   whileTap='hover'
                   whileHover='hover'
@@ -123,11 +119,11 @@ export const FixedCarousel = <T extends Record<string, any>>(
                   onMouseUp={e => handleElClick(e, index, items[index])}
                 >
                   {child}
-                </ItemContainer>
+                </motion.div>
               ))}
-          </CarouselWrapper>
+          </motion.div>
         </LayoutGroup>
-      </CarouselContainer>
+      </div>
     </>
   )
 }

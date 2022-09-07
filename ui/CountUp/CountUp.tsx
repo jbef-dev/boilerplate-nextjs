@@ -1,5 +1,4 @@
 import { useCountUp } from '@/ui/CountUp/useCountUp'
-import { useTheme } from '@emotion/react'
 import { CSSProperties } from 'react'
 
 /**
@@ -33,26 +32,19 @@ interface FeatureDivProps {
  * @prop increment? - amount by which it increments (deafult: 1)
  */
 export const CountUp = (props: FeatureDivProps) => {
-  const theme = useTheme()
+  // const theme = useTheme()
 
-  const {
-    color = theme.palette.primary.main,
-    textBefore = '+',
-    textAfter,
-    ...rest
-  } = props
+  const { color, textBefore = '+', textAfter, ...rest } = props
 
   const { count, ref } = useCountUp(rest)
 
   return (
     <div
+      className='m-0 text-5xl font-black text-primary-main'
       ref={ref}
-      style={{
-        margin: 0,
-        fontSize: theme.font.size[9],
-        fontWeight: theme.font.weight.black,
-        color: color,
-      }}
+      // style={{
+      //   color: color,
+      // }}
     >
       {textBefore}
       {count}

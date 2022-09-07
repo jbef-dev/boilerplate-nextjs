@@ -1,13 +1,13 @@
 import { CSSProperties, HTMLAttributes, ReactNode } from 'react'
 import { FixedCarousel } from './FixedCarousel/FixedCarousel'
-import { FreeCarousel } from './FreeCarousel/FreeCarousel'
+// import { FreeCarousel } from './FreeCarousel/FreeCarousel'
 
 export interface CarouselProps<T> extends HTMLAttributes<HTMLDivElement> {
   variant: 'free' | 'fixed'
   items: Array<T>
-  minwidth: string
-  midwidth: string
-  maxwidth: string
+  minwidth?: string
+  midwidth?: string
+  maxwidth?: string
   children: ReactNode[]
   elementGap?: CSSProperties['gap']
   autoScroll?: boolean
@@ -27,6 +27,7 @@ export const Carousel = <T extends Record<string, any>>(
         </FixedCarousel>
       )
     case 'free':
-      return <FreeCarousel {...rest}>{children}</FreeCarousel>
+      // return <FreeCarousel {...rest}>{children}</FreeCarousel>
+      return null
   }
 }

@@ -14,10 +14,16 @@ const enMessages = {
   'index.page.hero2': 'hero text name {kekw} 2',
   'index.page.section1': 'Book an appointment without obligation',
 
+  // Services Page
+  'services.page.title': 'Title English',
+  'services.page.description': 'description English',
+  'services.page.header': 'Meet the team',
+  'services.page.hero2': 'hero text name {kekw} 2',
+
   // About Page
   'about.page.title': 'Title English',
   'about.page.description': 'description English',
-  'about.page.hero1': 'hero section text',
+  'about.page.header': 'Meet the team',
   'about.page.hero2': 'hero text name {kekw} 2',
 
   // Contact Page
@@ -26,12 +32,19 @@ const enMessages = {
     'Contact us to book an appointment or receive a quote without obligation',
   'contact.page.header': 'hero section text',
   'contact.page.hero2': 'hero text name {kekw} 2',
+  'contact.page.form.header': 'Send us a message',
+  'contact.page.form.fullName': 'Full name *',
+  'contact.page.form.email': 'Contact Email *',
+  'contact.page.form.phone': 'Contact Telephone number *',
+  'contact.page.form.message': 'Your message...',
 
   // Common
   'button.contact': 'Contact',
   'button.close': 'Close',
   'button.call': 'Call',
   'button.moreInfo': 'More info',
+  'button.accept': 'Accept',
+  'button.decline': 'Decline',
 
   // ///////////////////////////////////////////
   // CONTENT

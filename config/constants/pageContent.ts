@@ -35,11 +35,11 @@ interface IFooterContact {
 }
 
 export const CONTACT_INFO: IFooterContact = {
-  addr: 'C/ Pedro Lorca 29, 3rd floor',
-  addr2: 'Torrevieja - 03181',
-  addr3: 'Alicante (Spain)',
-  telf1: '+34 711 01 12 93',
-  email: 'info@cnglawyers.com',
+  addr: 'C/ Nª Sra. de los Desamparados N5-2B',
+  addr2: 'Callosa de Segura - 03181',
+  addr3: 'Alicante',
+  telf1: '966 191 239',
+  email: '633 274 856',
 }
 
 interface IFooterCol {

@@ -1,105 +1,58 @@
-import { useTheme } from '@emotion/react'
-import Image from 'next/image'
-import { FOOTER_GROUPS, CONTACT_INFO } from '@config/constants/pageContent'
+import Image from 'next/future/image'
+import { CONTACT_INFO } from '@config/constants/pageContent'
 import logo from '@/public/logo.svg'
+import { FlexRow } from '@/ui/Containers/Flex'
+import { FaInstagram, FaWhatsapp } from 'react-icons/fa'
+import { SiGooglemaps, SiGooglemybusiness } from 'react-icons/si'
+import { MdMail } from 'react-icons/md'
 
 export const Footer = () => {
-  const theme = useTheme()
-
   return (
-    <footer
-      style={{
-        height: theme.layout.footer.height,
-        padding: `${theme.size[1]} 0`,
-        backgroundColor: theme.palette.grey[4],
-        color: theme.palette.text.dark[1],
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'space-evenly',
-          maxWidth: theme.breakpoints.xl,
-          height: '100%',
-          overflow: 'hidden',
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            width: '100%',
-            alignItems: 'center',
-            justifyContent: 'space-around',
-            [`@media (max-width: ${theme.breakpoints.md})`]: {
-              justifyContent: 'center',
-            },
-          }}
+    <footer className='flex items-center justify-center bg-gray-400 p-4 text-gray-700'>
+      <FlexRow centerContent className='flex-col justify-evenly gap-5'>
+        <FlexRow
+          centerContent
+          className='flex-col gap-5 p-0 lg:flex-row lg:justify-around'
         >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: theme.spacing[4],
-            }}
-          >
-            <div
-              style={{
-                width: '150px',
-              }}
-            >
-              <Image
-                alt='Logo'
-                src={logo}
-                loading='lazy'
-                // width='128px'
-                // height='50px'
-              />
-            </div>
-            <div>
+          <FlexRow className='gap-6' centerContent>
+            <Image
+              alt='Logo'
+              src={logo}
+              loading='lazy'
+              width={150}
+              height={60}
+              className='object-contain'
+            />
+            <FlexRow className='flex-col'>
               {Object.values(CONTACT_INFO).map((val, i) => (
                 <span key={i}>{val}</span>
               ))}
-            </div>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: theme.spacing[8],
-              [`@media (max-width: ${theme.breakpoints.md})`]: {
-                display: 'none',
-              },
-            }}
-          >
-            {FOOTER_GROUPS.map((col, i) => (
-              <div key={i}>
-                <span
-                  style={{
-                    fontWeight: 700,
-                  }}
-                >
-                  {col.title}
-                </span>
-                {col.links.map((link, j) => (
-                  <span key={j}>{link.label}</span>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div style={{ alignSelf: 'stretch' }} />
-        <span
-          style={{
-            color: theme.palette.text.dark[0],
-            whiteSpace: 'nowrap',
-            minWidth: 'max-content',
-          }}
-        >
-          © 2022 Designed by: J. Befán - All rights reserved.
-        </span>
-      </div>
+            </FlexRow>
+          </FlexRow>
+
+          <FlexRow className='gap-3 text-3xl text-gray-600'>
+            <FaInstagram />
+            <MdMail />
+            <FaWhatsapp />
+            <a
+              href='https://search.google.com/local/reviews?placeid=ChIJTbLqx8KiYw0RsXkljzwaVhs'
+              target='_blank'
+              rel='noreferrer'
+            >
+              <SiGooglemybusiness />
+            </a>
+            <SiGooglemaps />
+          </FlexRow>
+        </FlexRow>
+
+        <FlexRow centerContent grow className='text-center text-gray-800'>
+          <span>
+            © 2022 Designed and developed by: <b>jbef.es</b>
+            <br />
+            All rights reserved
+          </span>
+        </FlexRow>
+      </FlexRow>
     </footer>
   )
 }

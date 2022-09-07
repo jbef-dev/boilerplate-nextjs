@@ -1,18 +1,11 @@
-import useOutsideClick from '@hooks/useOusideClick'
+import useOutsideClick from '@/hooks/useOutsideClick'
 import { LOCALES } from '@config/locale/localeConfig'
-import { useTheme } from '@emotion/react'
-import { LayoutGroup, Variants } from 'framer-motion'
+import { LayoutGroup, motion, Variants } from 'framer-motion'
 import { useRouter } from 'next/router'
 import { CSSProperties, HTMLAttributes } from 'react'
 import { MdOutlineTranslate } from 'react-icons/md'
 import { useLangSelector } from './useLangSelector'
-import {
-  DropDownMenu,
-  LangButton,
-  LangItem,
-  LangMenuContainer,
-  LangMenuWrapper,
-} from './LangSelect.styles'
+import customAnimations from '@/styles/customAnimations'
 
 interface LanguageSelectorProps extends HTMLAttributes<HTMLDivElement> {
   bgColor?: CSSProperties['backgroundColor']
@@ -21,7 +14,6 @@ interface LanguageSelectorProps extends HTMLAttributes<HTMLDivElement> {
 
 export const LangSelect = (props: LanguageSelectorProps) => {
   const router = useRouter()
-  const theme = useTheme()
 
   const { bgColor, bgHover, ...rest } = props
 
@@ -35,10 +27,10 @@ export const LangSelect = (props: LanguageSelectorProps) => {
       opacity: 1,
       height: 'auto',
       transition: {
-        delayChildren: theme.animation.duration.fastest,
+        delayChildren: customAnimations.duration.fastest,
         staggerChildren: 0.09,
         staggerDirection: 1,
-        ...theme.animation.framer.menuOpen,
+        ...customAnimations.framer.menuOpen,
       },
     },
     closed: {
@@ -48,8 +40,8 @@ export const LangSelect = (props: LanguageSelectorProps) => {
       transition: {
         staggerChildren: 0.09,
         staggerDirection: -1,
-        delay: theme.animation.duration.normal,
-        ...theme.animation.framer.menuClose,
+        delay: customAnimations.duration.normal,
+        ...customAnimations.framer.menuClose,
       },
     },
   }
@@ -58,44 +50,53 @@ export const LangSelect = (props: LanguageSelectorProps) => {
     open: {
       y: 0,
       opacity: 1,
-      transition: { ...theme.animation.framer.normal },
+      transition: { ...customAnimations.framer.normal },
     },
     closed: {
       y: '-50%',
       opacity: 0,
-      transition: { ...theme.animation.framer.normal },
+      transition: { ...customAnimations.framer.normal },
     },
   }
 
   const items = LOCALES.map(locale => (
-    <LangItem
+    <motion.button
+      className='mb-2 flex w-full items-center justify-center text-gray-50 opacity-0 hover:bg-primary-lightest disabled:absolute disabled:hidden'
       key={locale}
-      bgHover={bgHover}
+      // bgHover={bgHover}
       disabled={locale === router.locale}
       onClick={() => handleLangClick(locale)}
       animate
       variants={langItemVariants}
     >
       {locale.toUpperCase()}
-    </LangItem>
+    </motion.button>
   ))
 
   return (
-    <LangMenuContainer {...rest}>
+    <div
+      className='relative flex w-20 items-center justify-center'
+      {...rest}
+    >
       <LayoutGroup>
-        <LangMenuWrapper bgColor={bgColor}>
-          <LangButton ref={ref} onClick={() => handleOutsideClick()}>
+        <div className='absolute top-1/4 flex flex-col items-center justify-center rounded bg-primary-main'>
+          <button
+            className='relative flex items-center justify-center gap-2 px-4 py-1 font-medium text-gray-50'
+            ref={ref}
+            onClick={() => handleOutsideClick()}
+          >
             {router.locale?.toUpperCase()} <MdOutlineTranslate />
-          </LangButton>
-          <DropDownMenu
+          </button>
+          <motion.div
+            className='relative flex w-full flex-col items-center justify-center font-normal'
             initial='closed'
             animate={open ? 'open' : 'closed'}
             variants={dropdownVariants}
           >
             {items}
-          </DropDownMenu>
-        </LangMenuWrapper>
+          </motion.div>
+        </div>
       </LayoutGroup>
-    </LangMenuContainer>
+    </div>
   )
 }

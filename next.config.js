@@ -4,16 +4,12 @@ const nextConfig = {
   i18n: {
     // Locales provided in config as per docs:
     // https://nextjs.org/docs/advanced-features/i18n-routing
-    locales: ['es', 'en', 'fr'],
+    locales: ['es', 'en'],
+    // locales: ['es', 'en', 'fr'],
     defaultLocale: 'es',
   },
-  // As per official template
-  // only in canary build
-  // https://github.com/vercel/next.js/blob/canary/examples/with-emotion-swc/next.config.js
-  compiler: {
-    emotion: true,
-  },
   experimental: {
+    newNextLinkBehavior: true,
     images: {
       allowFutureImage: true,
       remotePatterns: [
@@ -25,3 +21,10 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+
+// // /////////////////// BUNDLE ANALYZER //////////////////////////
+// const withBundleAnalyzer = require('@next/bundle-analyzer')({
+//   enabled: process.env.ANALYZE === 'true',
+// })
+// module.exports = withBundleAnalyzer(nextConfig) // bundleanalyzer
+// // /////////////////////////////////////////////////////////////

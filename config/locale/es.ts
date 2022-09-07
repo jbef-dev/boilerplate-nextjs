@@ -18,10 +18,16 @@ const esMessages: IntlMessages = {
   // 'index.hero2': 'sección hero 2 {kekw} español',
   'index.page.section1': 'Pide cita sin compromiso',
 
+  // Services Page
+  'services.page.title': 'Title English',
+  'services.page.description': 'description English',
+  'services.page.header': 'Meet the team',
+  'services.page.hero2': 'hero text name {kekw} 2',
+
   // About Page
   'about.page.title': 'Título Español',
   'about.page.description': 'descripción Español',
-  'about.page.hero1': 'hero section text',
+  'about.page.header': 'Conoce al equipo',
   'about.page.hero2': 'hero text name {kekw} 2',
 
   // Contact Page
@@ -30,12 +36,19 @@ const esMessages: IntlMessages = {
     'Contacta con nosotros para concertar una cita o pedir presupuesto sin compromiso',
   'contact.page.header': 'hero español',
   'contact.page.hero2': 'hero español nombre {kekw} 2',
+  'contact.page.form.header': 'Envíanos un mensaje',
+  'contact.page.form.fullName': 'Nombre completo *',
+  'contact.page.form.email': 'Email de contacto *',
+  'contact.page.form.phone': 'Teléfono de contacto *',
+  'contact.page.form.message': 'Tu mensaje...',
 
   // Common
   'button.contact': 'Contacto',
   'button.close': 'Cerrar',
   'button.call': 'Llamar',
   'button.moreInfo': 'Más info',
+  'button.accept': 'Aceptar',
+  'button.decline': 'Rechazar',
 
   // ///////////////////////////////////////////
   // CONTENT
