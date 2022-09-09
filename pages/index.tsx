@@ -31,8 +31,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({
       <PageContainer
         title={intl.formatMessage({ id: 'index.page.title' })}
         description={intl.formatMessage({ id: 'index.page.description' })}
-        // className='bg-gradient-to-b from-blue-50 to-blue-100'
-        // className='bg-gradient-to-b from-blue-500 to-white'
       >
         <Hero />
 
